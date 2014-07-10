@@ -58,7 +58,7 @@ function callMethod (n) {
 }
 
 function callReadySubscription (n, callback) {
-  Meteor.subscribe('test-publication-ready', n, function testCallback (error, result) {
+  Meteor.subscribe('test-publication-ready', n, function testCallback (error) {
     throw new Error('');
   });
 }
