@@ -8,12 +8,12 @@ Template.homepage.events({
     callMethod('event');
   },
 
-  'click #call-subscribe-ready': function testEventHandler (e) {
-    callReadySubscription('event');
+  'click #call-subscribe-client': function testEventHandler (e) {
+    callSubscriptionWithClientError('event');
   },
 
-  'click #call-subscribe-error': function testEventHandler (e) {
-    callErrorSubscription('event');
+  'click #call-subscribe-server': function testEventHandler (e) {
+    callSubscriptionWithServerError('event');
   },
 
   'click #call-collection-insert-client': function testEventHandler (e) {
@@ -57,13 +57,13 @@ function callMethod (n) {
   });
 }
 
-function callReadySubscription (n, callback) {
+function callSubscriptionWithClientError (n, callback) {
   Meteor.subscribe('test-publication-ready', n, function testCallback (error) {
-    throw new Error('');
+    throw new Error('subscription ready');
   });
 }
 
-function callErrorSubscription (n, callback) {
+function callSubscriptionWithServerError (n, callback) {
   Meteor.subscribe('test-publication-error', n, {
     onError: function testCallback (error) {
       if(error) {
