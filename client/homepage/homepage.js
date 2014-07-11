@@ -3,7 +3,9 @@ Template.homepage.rendered = function () {
   Meteor.subscribe('alloweditems');
   Meteor.subscribe('denieditems');
   Meteor.subscribe('observeditems');
-  callMethodWithClientError('event');
+  setTimeout(function() {
+    throw new Error('rendered');
+  }, 0);
 };
 
 Template.homepage.events({
