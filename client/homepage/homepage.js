@@ -4,84 +4,104 @@ Template.homepage.rendered = function () {
   Meteor.subscribe('denieditems');
   Meteor.subscribe('observeditems');
   setTimeout(function() {
+    console.clear();
     throw new Error('rendered');
   }, 0);
 };
 
 Template.homepage.events({
   'click #call-method-client': function testEventHandler (e) {
+    console.clear();
     callMethodWithClientError('event');
   },
 
   'click #call-method-server': function testEventHandler (e) {
+    console.clear();
     callMethodWithServerError('event');
   },
 
   'click #call-subscribe-client': function testEventHandler (e) {
+    console.clear();
     callSubscriptionWithClientError('event');
   },
 
   'click #call-subscribe-server': function testEventHandler (e) {
+    console.clear();
     callSubscriptionWithServerError('event');
   },
 
   'click #call-collection-insert-client': function testEventHandler (e) {
+    console.clear();
     callAllowedItemInsert();
   },
 
   'click #call-collection-insert-server': function testEventHandler (e) {
+    console.clear();
     callDeniedItemInsert();
   },
 
   'click #call-collection-update-client': function testEventHandler (e) {
+    console.clear();
     callAllowedItemUpdate();
   },
 
   'click #call-collection-update-server': function testEventHandler (e) {
+    console.clear();
     callDeniedItemUpdate();
   },
 
   'click #call-collection-upsert-client': function testEventHandler (e) {
+    console.clear();
     callAllowedItemUpsert();
   },
 
   'click #call-collection-upsert-server': function testEventHandler (e) {
+    console.clear();
     callDeniedItemUpsert();
   },
 
   'click #call-collection-remove-client': function testEventHandler (e) {
+    console.clear();
     callAllowedItemRemove();
   },
 
   'click #call-collection-remove-server': function testEventHandler (e) {
+    console.clear();
     callDeniedItemRemove();
   },
 
   'click #call-observe-change-added': function testEventHandler (e) {
+    console.clear();
     callObserveChangesAdded();
   },
 
   'click #call-observe-change-changed': function testEventHandler (e) {
+    console.clear();
     callObserveChangesChanged();
   },
 
   'click #call-observe-change-removed': function testEventHandler (e) {
+    console.clear();
     callObserveChangesRemoved();
   },
 
   'click #call-observe-change-addedAt': function testEventHandler (e) {
+    console.clear();
     callObserveChangesAddedAt();
   },
 
   'click #call-observe-change-changedAt': function testEventHandler (e) {
+    console.clear();
     callObserveChangesChangedAt();
   },
 
   'click #call-observe-change-removedAt': function testEventHandler (e) {
+    console.clear();
     callObserveChangesRemovedAt();
   },
 
   'click #call-observe-change-movedTo': function testEventHandler (e) {
+    console.clear();
     callObserveChangesMovedTo();
   },
 });
