@@ -1,41 +1,79 @@
 <template name="homepage">
-  <p>
-    <button id="call-method-client">Call Method (Client Error)</button>
-    <button id="call-method-server">Call Method (Server Error)</button>
-  </p>
+  <div class="container" style="padding: 20px 0">
 
-  <p>
-    <button id="call-subscribe-client">Call Subscribe (Client Error)</button>
-    <button id="call-subscribe-server">Call Subscribe (Server Error)</button>
-  </p>
+    <div class="alert alert-warning">
+      <strong>Hi there!</strong> Open your browser console and click these buttons to view traces.
+    </div>
 
-  <p>
-    <button id="call-collection-insert-client">Call Collection Insert (Client Error)</button>
-    <button id="call-collection-insert-server">Call Collection Insert (Server Error)</button>
-  </p>
+    <div class="row">
+      <div class="col-md-3">
+        <h2>Method Calls</h2>
+        <button class="btn btn-default btn-sm" id="call-method-client">Client</button>
+        <button class="btn btn-default btn-sm" id="call-method-server">Server</button>
+      </div>
+      <div class="col-md-3">
+        <h2>Subscriptions</h2>
+        <button class="btn btn-default btn-sm" id="call-subscribe-client">Client</button>
+        <button class="btn btn-default btn-sm" id="call-subscribe-server">Server</button>
+      </div>
+      <div class="col-md-3">
+        <h2>Observers</h2>
+        <p>
+          <button class="btn btn-default btn-sm" id="call-observe-change-added">Added</button>
+          <button class="btn btn-default btn-sm" id="call-observe-change-changed">Changed</button>
+          <button class="btn btn-default btn-sm" id="call-observe-change-removed">Removed</button>
+        </p>
+        <p>
+          <button class="btn btn-default btn-sm" id="call-observe-change-addedAt">AddedAt</button>
+          <button class="btn btn-default btn-sm" id="call-observe-change-changedAt">ChangedAt</button>
+          <button class="btn btn-default btn-sm" id="call-observe-change-removedAt">RemovedAt</button>
+        </p>
+        <p>
+          <button class="btn btn-default btn-sm" id="call-observe-change-movedTo">MovedTo</button>
+        </p>
+      </div>
+      <div class="col-md-3">
+        <h2>Collections</h2>
+        <table class="table">
+          <tr>
+            <td>Insert</td>
+            <td>
+              <p>
+                <button class="btn btn-default btn-sm" id="call-collection-insert-client">Client</button>
+                <button class="btn btn-default btn-sm" id="call-collection-insert-server">Server</button>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>Update</td>
+            <td>
+              <p>
+                <button class="btn btn-default btn-sm" id="call-collection-update-client">Client</button>
+                <button class="btn btn-default btn-sm" id="call-collection-update-server">Server</button>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>Upsert</td>
+            <td>
+              <p>
+                <button class="btn btn-default btn-sm" id="call-collection-upsert-client">Client</button>
+                <button class="btn btn-default btn-sm" id="call-collection-upsert-server">Server</button>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>Remove</td>
+            <td>
+              <p>
+                <button class="btn btn-default btn-sm" id="call-collection-remove-client">Client</button>
+                <button class="btn btn-default btn-sm" id="call-collection-remove-server">Server</button>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
 
-  <p>
-    <button id="call-collection-update-client">Call Collection Update (Client Error)</button>
-    <button id="call-collection-update-server">Call Collection Update (Server Error)</button>
-  </p>
-
-  <p>
-    <button id="call-collection-upsert-client">Call Collection Upsert (Client Error)</button>
-    <button id="call-collection-upsert-server">Call Collection Upsert (Server Error)</button>
-  </p>
-
-  <p>
-    <button id="call-collection-remove-client">Call Collection Remove (Client Error)</button>
-    <button id="call-collection-remove-server">Call Collection Remove (Server Error)</button>
-  </p>
-
-  <p>
-    <button id="call-observe-change-added">Added</button>
-    <button id="call-observe-change-changed">Changed</button>
-    <button id="call-observe-change-removed">Removed</button>
-    <button id="call-observe-change-addedAt">AddedAt</button>
-    <button id="call-observe-change-changedAt">ChangedAt</button>
-    <button id="call-observe-change-removedAt">RemovedAt</button>
-    <button id="call-observe-change-movedTo">MovedTo</button>
-  </p>
+  </div>
 </template>

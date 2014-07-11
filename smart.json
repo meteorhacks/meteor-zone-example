@@ -4,6 +4,7 @@
     "inject-initial": {},
     "zones": {
       "path": "../"
-    }
+    },
+    "bootstrap-3": {}
   }
 }
