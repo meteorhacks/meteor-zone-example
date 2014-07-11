@@ -1,5 +1,8 @@
 
 Template.homepage.rendered = function () {
+  Meteor.subscribe('alloweditems');
+  Meteor.subscribe('denieditems');
+  Meteor.subscribe('observeditems');
   callMethodWithClientError('event');
 };
 
