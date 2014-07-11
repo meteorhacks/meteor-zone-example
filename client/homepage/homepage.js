@@ -151,8 +151,12 @@ function callAllowedItemUpdate () {
 }
 
 function callDeniedItemUpdate () {
-  DeniedItems.update({_id: 'foobar'}, {$set: {foo: 'bar'}}, function (error, count) {
-    throw error;
+  var doc = {_id: 'foobar', foo: 'bar'};
+  Meteor.call('createDeniedItem', doc, function (error, result) {
+    DeniedItems.update({_id: 'foobar'}, {$set: {foo: 'baz'}}, function (error, count) {
+      Meteor.call('clear');
+      throw error;
+    });
   });
 }
 
@@ -175,8 +179,12 @@ function callAllowedItemRemove () {
 }
 
 function callDeniedItemRemove () {
-  DeniedItems.remove({_id: 'foobar'}, function (error, count) {
-    throw error;
+  var doc = {_id: 'foobar', foo: 'bar'};
+  Meteor.call('createDeniedItem', doc, function (error, result) {
+    DeniedItems.remove({_id: 'foobar'}, function (error, count) {
+      Meteor.call('clear');
+      throw error;
+    });
   });
 }
 
