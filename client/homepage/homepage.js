@@ -107,9 +107,7 @@ function callSubscriptionWithClientError (n, callback) {
 function callSubscriptionWithServerError (n, callback) {
   Meteor.subscribe('test-publication-error', n, {
     onError: function testCallback (error) {
-      if(error) {
-        throw error;
-      }
+      throw error;
     }
   });
 }
@@ -122,9 +120,7 @@ function callAllowedItemInsert () {
 
 function callDeniedItemInsert () {
   DeniedItems.insert({_id: 'foobar'}, function (error, result) {
-    if(error) {
-      throw error;
-    }
+    throw error;
   });
 }
 
@@ -164,9 +160,7 @@ function callAllowedItemRemove () {
 
 function callDeniedItemRemove () {
   DeniedItems.remove({_id: 'foobar'}, function (error, count) {
-    if(error) {
-      throw error;
-    }
+    throw error;
   });
 }
 
