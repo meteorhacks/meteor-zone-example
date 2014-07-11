@@ -1,11 +1,15 @@
 
 Template.homepage.rendered = function () {
-  callMethod('rendered');
+  callMethodWithClientError('event');
 };
 
 Template.homepage.events({
-  'click #call-method': function testEventHandler (e) {
-    callMethod('event');
+  'click #call-method-client': function testEventHandler (e) {
+    callMethodWithClientError('event');
+  },
+
+  'click #call-method-server': function testEventHandler (e) {
+    callMethodWithServerError('event');
   },
 
   'click #call-subscribe-client': function testEventHandler (e) {
@@ -49,11 +53,15 @@ Template.homepage.events({
   }
 });
 
-function callMethod (n) {
+function callMethodWithClientError (n) {
   Meteor.call('test-method', n, function testCallback (error, result) {
-    if(error) {
-      throw error;
-    }
+    throw new Error('method');
+  });
+}
+
+function callMethodWithServerError (n) {
+  Meteor.call('test-method', n, function testCallback (error, result) {
+    throw error;
   });
 }
 
