@@ -152,9 +152,7 @@ function callAllowedItemUpdate () {
 
 function callDeniedItemUpdate () {
   DeniedItems.update({_id: 'foobar'}, {$set: {foo: 'bar'}}, function (error, count) {
-    if(error) {
-      throw error;
-    }
+    throw error;
   });
 }
 
@@ -166,9 +164,7 @@ function callAllowedItemUpsert () {
 
 function callDeniedItemUpsert () {
   DeniedItems.upsert({_id: 'foobar'}, {$set: {foo: 'bar'}}, function (error, count) {
-    if(error) {
-      throw error;
-    }
+    throw error;
   });
 }
 
