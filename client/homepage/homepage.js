@@ -55,7 +55,35 @@ Template.homepage.events({
 
   'click #call-collection-remove-server': function testEventHandler (e) {
     callDeniedItemRemove();
-  }
+  },
+
+  'click #call-observe-change-added': function testEventHandler (e) {
+    callObserveChangesAdded();
+  },
+
+  'click #call-observe-change-changed': function testEventHandler (e) {
+    callObserveChangesChanged();
+  },
+
+  'click #call-observe-change-removed': function testEventHandler (e) {
+    callObserveChangesRemoved();
+  },
+
+  'click #call-observe-change-addedAt': function testEventHandler (e) {
+    callObserveChangesAddedAt();
+  },
+
+  'click #call-observe-change-changedAt': function testEventHandler (e) {
+    callObserveChangesChangedAt();
+  },
+
+  'click #call-observe-change-removedAt': function testEventHandler (e) {
+    callObserveChangesRemovedAt();
+  },
+
+  'click #call-observe-change-movedTo': function testEventHandler (e) {
+    callObserveChangesMovedTo();
+  },
 });
 
 function callMethodWithClientError (n) {
@@ -139,5 +167,95 @@ function callDeniedItemRemove () {
     if(error) {
       throw error;
     }
+  });
+}
+
+function callObserveChangesAdded () {
+  Meteor.call('clear', function (error, result) {
+    ObservedItems.find({observeType: 'added'}).observe({
+      added: function (document) {
+        ObservedItems.remove({_id: 'foobar'});
+        throw new Error('added');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'added'});
+  });
+}
+
+function callObserveChangesAddedAt () {
+  Meteor.call('clear', function (error, result) {
+    ObservedItems.find({observeType: 'addedAt'}).observe({
+      addedAt: function (document) {
+        ObservedItems.remove({_id: 'foobar'});
+        throw new Error('addedAt');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'addedAt'});
+  });
+}
+
+function callObserveChangesChanged () {
+  Meteor.call('clear', function (error, result) {
+    ObservedItems.find({observeType: 'changed'}).observe({
+      changed: function (document) {
+        ObservedItems.remove({_id: 'foobar'});
+        throw new Error('changed');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'changed'});
+    ObservedItems.update({_id: 'foobar'}, {$set: {foo: 'bar'}});
+  });
+}
+
+function callObserveChangesChangedAt () {
+  Meteor.call('clear', function (error, result) {
+    ObservedItems.find({observeType: 'changedAt'}).observe({
+      changedAt: function (document) {
+        ObservedItems.remove({_id: 'foobar'});
+        throw new Error('changedAt');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'changedAt'});
+    ObservedItems.update({_id: 'foobar'}, {$set: {foo: 'bar'}});
+  });
+}
+
+function callObserveChangesRemoved () {
+  Meteor.call('clear', function (error, result) {
+    ObservedItems.find({observeType: 'removed'}).observe({
+      removed: function (document) {
+        throw new Error('removed');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'removed'});
+    ObservedItems.remove({_id: 'foobar'});
+  });
+}
+
+function callObserveChangesRemovedAt () {
+  Meteor.call('clear', function (error, result) {
+    ObservedItems.find({observeType: 'removedAt'}).observe({
+      removedAt: function (document) {
+        throw new Error('removedAt');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'removedAt'});
+    ObservedItems.remove({_id: 'foobar'});
+  });
+}
+
+function callObserveChangesMovedTo () {
+  Meteor.call('clear', function (error, result) {
+    var options = {sort: {value: 1}};
+    ObservedItems.find({observeType: 'movedTo'}, options).observe({
+      movedTo: function (document) {
+        ObservedItems.remove({_id: 'foobar'});
+        ObservedItems.remove({_id: 'foobaz'});
+        throw new Error('movedTo');
+      }
+    });
+    ObservedItems.insert({_id: 'foobar', observeType: 'movedTo', value: 10});
+    ObservedItems.insert({_id: 'foobaz', observeType: 'movedTo', value: 20});
+    ObservedItems.update({_id: 'foobar'}, {$set: {value: 30}});
   });
 }
