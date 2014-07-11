@@ -1,7 +1,8 @@
 {
   "packages": {
     "iron-router": {},
-    "zone": {
+    "inject-initial": {},
+    "zones": {
       "path": "../"
     }
   }
