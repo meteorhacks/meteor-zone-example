@@ -4,8 +4,7 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-iron-router
 insecure
-inject-initial
-zones
-bootstrap-3
+iron:router
+pinglamb:bootstrap3
+meteorhacks:zones
