@@ -1,7 +1,7 @@
 
 Meteor.methods({
-  'test-method': function (msg) {
-    throw new Meteor.Error('~ test method error ~ '+msg+' ~');
+  'test-method': function () {
+    throw new Meteor.Error('method');
   },
 
   clear: function () {

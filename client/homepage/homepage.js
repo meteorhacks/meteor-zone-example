@@ -12,22 +12,22 @@ Template.homepage.rendered = function () {
 Template.homepage.events({
   'click #call-method-client': function testEventHandler (e) {
     console.clear();
-    callMethodWithClientError('event');
+    callMethodWithClientError();
   },
 
   'click #call-method-server': function testEventHandler (e) {
     console.clear();
-    callMethodWithServerError('event');
+    callMethodWithServerError();
   },
 
   'click #call-subscribe-client': function testEventHandler (e) {
     console.clear();
-    callSubscriptionWithClientError('event');
+    callSubscriptionWithClientError();
   },
 
   'click #call-subscribe-server': function testEventHandler (e) {
     console.clear();
-    callSubscriptionWithServerError('event');
+    callSubscriptionWithServerError();
   },
 
   'click #call-collection-insert-client': function testEventHandler (e) {
@@ -106,47 +106,39 @@ Template.homepage.events({
   },
 });
 
-function callMethodWithClientError (n) {
-  Meteor.call('test-method', n, function testCallback (error, result) {
+function callMethodWithClientError () {
+  Meteor.call('test-method', function testCallback (error, result) {
     throw new Error('method');
   });
 }
 
-function callMethodWithServerError (n) {
-  Meteor.call('test-method', n, function testCallback (error, result) {
-    throw error;
-  });
+function callMethodWithServerError () {
+  Meteor.call('test-method');
 }
 
-function callSubscriptionWithClientError (n, callback) {
-  Meteor.subscribe('test-publication-ready', n, function testCallback (error) {
+function callSubscriptionWithClientError (callback) {
+  Meteor.subscribe('test-publication-ready', function testCallback (error) {
     throw new Error('subscription ready');
   });
 }
 
-function callSubscriptionWithServerError (n, callback) {
-  Meteor.subscribe('test-publication-error', n, {
-    onError: function testCallback (error) {
-      throw error;
-    }
-  });
+function callSubscriptionWithServerError (callback) {
+  Meteor.subscribe('test-publication-error');
 }
 
 function callAllowedItemInsert () {
   AllowedItems.insert({_id: 'foobar'}, function (error, result) {
-    throw new Error('');
+    throw new Error();
   });
 }
 
 function callDeniedItemInsert () {
-  DeniedItems.insert({_id: 'foobar'}, function (error, result) {
-    throw error;
-  });
+  DeniedItems.insert({_id: 'foobar'});
 }
 
 function callAllowedItemUpdate () {
   AllowedItems.update({_id: 'foobar'}, {$set: {foo: 'bar'}}, function (error, count) {
-    throw new Error('');
+    throw new Error();
   });
 }
 
@@ -155,26 +147,23 @@ function callDeniedItemUpdate () {
   Meteor.call('createDeniedItem', doc, function (error, result) {
     DeniedItems.update({_id: 'foobar'}, {$set: {foo: 'baz'}}, function (error, count) {
       Meteor.call('clear');
-      throw error;
     });
   });
 }
 
 function callAllowedItemUpsert () {
   AllowedItems.upsert({_id: 'foobar'}, {$set: {foo: 'bar'}}, function (error, count) {
-    throw new Error('');
+    throw new Error();
   });
 }
 
 function callDeniedItemUpsert () {
-  DeniedItems.upsert({_id: 'foobar'}, {$set: {foo: 'bar'}}, function (error, count) {
-    throw error;
-  });
+  DeniedItems.upsert({_id: 'foobar'}, {$set: {foo: 'bar'}});
 }
 
 function callAllowedItemRemove () {
   AllowedItems.remove({_id: 'foobar'}, function (error, count) {
-    throw new Error('');
+    throw new Error();
   });
 }
 
@@ -183,7 +172,6 @@ function callDeniedItemRemove () {
   Meteor.call('createDeniedItem', doc, function (error, result) {
     DeniedItems.remove({_id: 'foobar'}, function (error, count) {
       Meteor.call('clear');
-      throw error;
     });
   });
 }
